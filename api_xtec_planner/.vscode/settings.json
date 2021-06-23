@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/7bc42daa-0d38-42e6-b2d4-770d5a1f38d4/resourceGroups/xtecgroup/providers/Microsoft.Web/sites/xtecplannerapi",
+    "appService.deploySubpath": "."
+}
