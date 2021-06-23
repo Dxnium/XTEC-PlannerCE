@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const eventRoutes = require('./routes/eventRoutes');
 const estudianteRoutes = require('./routes/estudianteRoutes');
 const profesorRoutes = require('./routes/profesorRoutes');
-
+const administradorRoutes = require('./routes/administradorRoutes');
 
 const app = express();
 
@@ -17,6 +17,7 @@ app.use(bodyParser.json());
 app.use('/api', eventRoutes.routes);
 app.use('/api', estudianteRoutes.routes);
 app.use('/api', profesorRoutes.routes);
+app.use('/api', administradorRoutes.routes);
 
 app.get('/', (req, res) => {
   res.send('Hello World!')

@@ -13,6 +13,7 @@ const getProfesores = async () => {
         console.log(error.message);
     }
 }
+
 /*
 const getByCedula = async(cedula) => {
     try {
@@ -48,44 +49,81 @@ const creatProfesor = async (profesordata) => {
         return error.message;
     }
 }
-/*
-const updateEvent = async (eventId, data) => {
+
+
+const verifProfesor = async(profesordata) => {
+
     try {
         let pool = await sql.connect(config.sql);
-        const sqlQueries = await utils.loadSqlQueries('events2');
-        const update = await pool.request()
-                        .input('eventId', sql.Int, eventId)
-                        .input('eventTitle', sql.NVarChar(100), data.eventTitle)
-                        .input('eventDescription', sql.NVarChar(1500), data.eventDescription)
-                        .input('startDate', sql.Date, data.startDate)
-                        .input('endDate', sql.Date, data.endDate)
-                        .input('avenue', sql.NVarChar(200), data.avenue)
-                        .input('maxMembers', sql.Int, data.maxMembers)
-                        .query(sqlQueries.updateEvent);
-        return update.recordset;
+        const sqlQueries = await utils.loadSqlQueries('profesores');
+        const profesor = await pool.request()
+                            .input('cedula', sql.VarChar, profesordata.cedula)
+                            .input('contrasena_prof', sql.VarChar, profesordata.contrasena_prof)
+                            .query(sqlQueries.profesorVerifcuenta);
+                      
+        if(JSON.stringify(profesor.recordset)=='[]'){
+            return false;
+        }else{
+            return true;
+        }
+        
     } catch (error) {
         return error.message;
     }
 }
 
-const deleteEvent = async (eventId) => {
+
+
+
+const updateProfesor = async (data) => {
     try {
         let pool = await sql.connect(config.sql);
-        const sqlQueries = await utils.loadSqlQueries('events2');
-        const deleteEvent = await pool.request()
-                            .input('eventId', sql.Int, eventId)
-                            .query(sqlQueries.deleteEvent);
-        return deleteEvent.recordset;
+        const sqlQueries = await utils.loadSqlQueries('profesores');
+        const update = await pool.request()
+                        .input('cedula', sql.VarChar(50), data.cedula)
+                        .input('carrera_prof', sql.VarChar(50), data.carrera_prof)
+                        
+                        .query(sqlQueries.updateProfesor);
+        return true;
     } catch (error) {
         return error.message;
     }
-}*/
+}
+
+const updateEstadoProfesor = async (data) => {
+    try {
+        let pool = await sql.connect(config.sql);
+        const sqlQueries = await utils.loadSqlQueries('profesores');
+        const update = await pool.request()
+                        .input('cedula', sql.VarChar(50), data.cedula)
+                        .input('estado_registro', sql.VarChar(50), data.estado_registro)
+                        
+                        .query(sqlQueries.updateEstadoProfesor);
+        return true;
+    } catch (error) {
+        return error.message;
+    }
+}
+
+const deleteProfesor = async (profesordata) => {
+    try {
+        let pool = await sql.connect(config.sql);
+        const sqlQueries = await utils.loadSqlQueries('profesores');
+        const deleteProf = await pool.request()
+                            .input('cedula', sql.VarChar(50), profesordata.cedula)
+                            .query(sqlQueries.deleteProfesor);
+        return true
+    } catch (error) {
+        return error.message;
+    }
+}
 
 module.exports = {
     getProfesores,
-    creatProfesor
-    /*getByCarnet
-    creatEvent,
-    updateEvent,
-    deleteEvent*/
+    creatProfesor,
+    verifProfesor,
+    updateProfesor,
+    updateEstadoProfesor,
+    deleteProfesor
+  
 }

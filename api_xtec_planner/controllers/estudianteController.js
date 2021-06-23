@@ -14,8 +14,8 @@ const getAllEstudiantes = async (req, res, next) => {
 
 const getEstudiante = async (req, res, next) => {
     try {
-        const carnet = req.params.id;
-        const estudiante = await estData.getByCarnet(carnet);
+        const data = req.body;
+        const estudiante = await estData.getByCarnet(data);
         res.send(estudiante);
     } catch (error) {
         res.status(400).send(error.message);
@@ -37,42 +37,57 @@ const addEstudiante = async (req, res, next) => {
 const verificarEstudiante = async (req, res, next) => {
     try {
         const data = req.body;
-        const insert = await estData.verifEstudiante(data);
-        res.send(insert);
+        const select = await estData.verifEstudiante(data);
+        res.send(select);
     } catch (error) {
         res.status(400).send(error.message);
     }
 }
 
 
-/*
 
-const updatEvent = async (req, res, next) => {
+const updatEstudiante = async (req, res, next) => {
     try {
-        const eventId =  req.params.id;
         const data = req.body;
-        const updated = await eventData.updateEvent(eventId, data);
+        const updated = await estData.updateEstudiante(data);
         res.send(updated);
     } catch (error) {
         res.status(400).send(error.message);
     }
 }
 
-const deleteEvent = async (req, res, next) => {
+const updatEstadoEstudiante = async (req, res, next) => {
     try {
-        const eventId = req.params.id;
-        const deletedEvent = await eventData.deleteEvent(eventId);
-        res.send(deletedEvent);
+        const data = req.body;
+        const updated = await estData.updateEstadoEstudiante(data);
+        res.send(updated);
     } catch (error) {
         res.status(400).send(error.message);
     }
 }
-*/
+
+
+
+
+
+const deletEstudiante = async (req, res, next) => {
+    try {
+        const data = req.body;
+        const deletedEstudiante = await estData.deleteEstudiante(data);
+        res.send(deletedEstudiante);
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+}
+
 module.exports = {
     getAllEstudiantes,
     addEstudiante,
     getEstudiante,
-    verificarEstudiante
+    verificarEstudiante,
+    updatEstudiante,
+    updatEstadoEstudiante,
+    deletEstudiante
     /*updatEvent,
     deleteEvent*/
 }

@@ -30,32 +30,61 @@ const addProfesor = async (req, res, next) => {
     } catch (error) {
         res.status(400).send(error.message);
     }
-}/*
+}
 
-const updatEvent = async (req, res, next) => {
+
+const verificarProfesor = async (req, res, next) => {
     try {
-        const eventId =  req.params.id;
         const data = req.body;
-        const updated = await eventData.updateEvent(eventId, data);
+        const select = await profData.verifProfesor(data);
+        res.send(select);
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+}
+
+
+
+
+
+const updatProfesor = async (req, res, next) => {
+    try {
+        const data =  req.body;
+        const updated = await profData.updateProfesor(data);
         res.send(updated);
     } catch (error) {
         res.status(400).send(error.message);
     }
 }
 
-const deleteEvent = async (req, res, next) => {
+const updatEstadoProfesor = async (req, res, next) => {
     try {
-        const eventId = req.params.id;
-        const deletedEvent = await eventData.deleteEvent(eventId);
-        res.send(deletedEvent);
+        const data =  req.body;
+        const updated = await profData.updateEstadoProfesor(data);
+        res.send(updated);
     } catch (error) {
         res.status(400).send(error.message);
     }
 }
-*/
+
+const deletProfesor = async (req, res, next) => {
+    try {
+        const data = req.body;
+        const deletedProfesor = await profData.deleteProfesor(data);
+        res.send(deletedProfesor);
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+}
+
 module.exports = {
     getAllProfesores,
-    addProfesor
+    addProfesor,
+    verificarProfesor,
+    updatProfesor,
+    updatEstadoProfesor,
+    deletProfesor
+
     /*getEstudiante,
     updatEvent,
     deleteEvent*/

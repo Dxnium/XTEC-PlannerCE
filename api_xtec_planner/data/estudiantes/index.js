@@ -14,12 +14,12 @@ const getEstudiantes = async () => {
     }
 }
 
-const getByCarnet = async(carnet) => {
+const getByCarnet = async(data) => {
     try {
         let pool = await sql.connect(config.sql);
         const sqlQueries = await utils.loadSqlQueries('estudiantes');
         const estudiante = await pool.request()
-                            .input('carnet', sql.VarChar, carnet)
+                            .input('carnet', sql.VarChar, data.carnet)
                             .query(sqlQueries.estudiantebyCarnet);
         return estudiante.recordset;
     } catch (error) {
@@ -47,7 +47,7 @@ const creatEstudiante = async (estudiantedata) => {
                             .input('estado_registro', sql.VarChar(50), estudiantedata.estado_registro)
                
                             .query(sqlQueries.createEstudiante);                            
-        return insertEstudiante.recordset;
+        return true;
     } catch (error) {
         return error.message;
     }
@@ -78,45 +78,62 @@ const verifEstudiante = async(estudiantedata) => {
 }
 
 
-/*
-const updateEvent = async (eventId, data) => {
+
+const updateEstudiante = async (estudiantedata) => {
     try {
         let pool = await sql.connect(config.sql);
-        const sqlQueries = await utils.loadSqlQueries('events2');
+        const sqlQueries = await utils.loadSqlQueries('estudiantes');
         const update = await pool.request()
-                        .input('eventId', sql.Int, eventId)
-                        .input('eventTitle', sql.NVarChar(100), data.eventTitle)
-                        .input('eventDescription', sql.NVarChar(1500), data.eventDescription)
-                        .input('startDate', sql.Date, data.startDate)
-                        .input('endDate', sql.Date, data.endDate)
-                        .input('avenue', sql.NVarChar(200), data.avenue)
-                        .input('maxMembers', sql.Int, data.maxMembers)
-                        .query(sqlQueries.updateEvent);
-        return update.recordset;
+                        .input('correo_est', sql.VarChar(50), estudiantedata.correo_est)
+                        .input('telefono', sql.VarChar(50), estudiantedata.telefono)
+                        .input('carrera_est', sql.VarChar(50), estudiantedata.carrera_est)
+                        .input('provincia_reside', sql.VarChar(50), estudiantedata.provincia_reside)
+                        .input('carnet', sql.VarChar(50), estudiantedata.carnet)
+    
+                        .query(sqlQueries.updateEstudiante);
+        return true;
     } catch (error) {
         return error.message;
     }
 }
 
-const deleteEvent = async (eventId) => {
+const updateEstadoEstudiante = async (estudiantedata) => {
     try {
         let pool = await sql.connect(config.sql);
-        const sqlQueries = await utils.loadSqlQueries('events2');
-        const deleteEvent = await pool.request()
-                            .input('eventId', sql.Int, eventId)
-                            .query(sqlQueries.deleteEvent);
-        return deleteEvent.recordset;
+        const sqlQueries = await utils.loadSqlQueries('estudiantes');
+        const update = await pool.request()
+                        .input('estado_registro', sql.VarChar(50), estudiantedata.estado_registro)
+                        .input('carnet', sql.VarChar(50), estudiantedata.carnet)
+    
+                        .query(sqlQueries.updateEstadoEstudiante);
+
+        return true;
     } catch (error) {
         return error.message;
     }
-}*/
+}
+
+
+
+const deleteEstudiante = async (estudiantedata) => {
+    try {
+        let pool = await sql.connect(config.sql);
+        const sqlQueries = await utils.loadSqlQueries('estudiantes');
+        const deleteEst = await pool.request()
+                            .input('carnet', sql.VarChar, estudiantedata.carnet)
+                            .query(sqlQueries.deleteEstudiante);
+        return true
+    } catch (error) {
+        return error.message;
+    }
+}
 
 module.exports = {
     getEstudiantes,
     creatEstudiante,
     getByCarnet,
-    verifEstudiante
-    /*creatEvent,
-    updateEvent,
-    deleteEvent*/
+    verifEstudiante,
+    updateEstudiante,
+    updateEstadoEstudiante,
+    deleteEstudiante
 }
