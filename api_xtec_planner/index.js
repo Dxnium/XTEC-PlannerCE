@@ -7,6 +7,7 @@ const eventRoutes = require('./routes/eventRoutes');
 const estudianteRoutes = require('./routes/estudianteRoutes');
 const profesorRoutes = require('./routes/profesorRoutes');
 const administradorRoutes = require('./routes/administradorRoutes');
+const tableroRoutes = require('./routes/tableroRoutes');
 
 const app = express();
 
@@ -18,6 +19,7 @@ app.use('/api', eventRoutes.routes);
 app.use('/api', estudianteRoutes.routes);
 app.use('/api', profesorRoutes.routes);
 app.use('/api', administradorRoutes.routes);
+app.use('/api', tableroRoutes.routes);
 
 app.get('/', (req, res) => {
   res.send('Hello World!')
