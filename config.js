@@ -5,7 +5,7 @@ const assert = require('assert');
 
 dotenv.config();
 
-const {PORT, HOST, HOST_URL, SQL_USER, SQL_PASSWORD, SQL_DATABASE, SQL_SERVER,SQL_DATABASEdatic} = process.env;
+const {PORT, HOST, HOST_URL, SQL_USER, SQL_PASSWORD, SQL_DATABASE, SQL_SERVER} = process.env;
 
 const sqlEncrypt = process.env.SQL_ENCRYPT === "true";
 
@@ -32,24 +32,6 @@ module.exports = {
 };
 
 
-module.exports = {
-    //port: PORT,
-    host: HOST,
-    url: HOST_URL,
-
-    
-    sqldatic: {
-        server: SQL_SERVER,
-        database: "daticdb",
-        user: SQL_USER,
-        password: SQL_PASSWORD,
-        options: {
-            encrypt: sqlEncrypt,
-            enableArithAbort: true
-        },
-    },
-
-};
 
 
 
