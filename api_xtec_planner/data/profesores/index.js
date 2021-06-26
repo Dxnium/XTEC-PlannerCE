@@ -44,7 +44,7 @@ const creatProfesor = async (profesordata) => {
                             .input('estado_registro', sql.VarChar(50), profesordata.estado_registro)
 
                             .query(sqlQueries.createProfesor);                            
-        return insertProfesor.recordset;
+        return true;
     } catch (error) {
         return error.message;
     }

@@ -12,6 +12,8 @@ const getAllEstudiantes = async (req, res, next) => {
     }
 }
 
+
+
 const getEstudiante = async (req, res, next) => {
     try {
         const data = req.body;
@@ -22,6 +24,15 @@ const getEstudiante = async (req, res, next) => {
     }
 }
 
+const existeEstudiante = async (req, res, next) => {
+    try {
+        const data = req.body;
+        const estudiante = await estData.existeEstudiantedatic(data);
+        res.send(estudiante);
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+}
 
 
 const addEstudiante = async (req, res, next) => {
@@ -87,7 +98,9 @@ module.exports = {
     verificarEstudiante,
     updatEstudiante,
     updatEstadoEstudiante,
-    deletEstudiante
+    deletEstudiante,
+
+    existeEstudiante
     /*updatEvent,
     deleteEvent*/
 }
