@@ -2,6 +2,7 @@
 const utils = require('../utils');
 const config = require('../../config');
 const sql = require('mssql');
+const sql2 = require('mssql');
 
 const getEstudiantes = async () => {
     try {
@@ -17,6 +18,7 @@ const getEstudiantes = async () => {
 const getByCarnet = async(data) => {
     try {
         let pool = await sql.connect(config.sql);
+        
         const sqlQueries = await utils.loadSqlQueries('estudiantes');
         const estudiante = await pool.request()
                             .input('carnet', sql.VarChar, data.carnet)
@@ -29,11 +31,12 @@ const getByCarnet = async(data) => {
 
 const existeEstudiantedatic = async(data) => {
     try {
-        let pool = await sql.connect(config.sqldatic);
+        let pool = await sql2.connect(config.sqldatic);
+       
         const sqlQueries = await utils.loadSqlQueries('estudiantes');
         const estudiante = await pool.request()
-                            .input('carnet', sql.VarChar, data.carnet)
-                            .input('contrasena_est', sql.VarChar, data.contrasena_est)
+                            .input('carnet', sql2.VarChar, data.carnet)
+                            .input('contrasena_est', sql2.VarChar, data.contrasena_est)
                             .query(sqlQueries.estudianteExiste);
                             
         if(JSON.stringify(estudiante.recordset)=='[]'){
@@ -77,6 +80,25 @@ const creatEstudiante = async (estudiantedata) => {
     }
 }
 
+
+const envSolicAmistadEstudiante = async (estudiantedata) => {
+    try {
+        let pool = await sql.connect(config.sql);
+        const sqlQueries = await utils.loadSqlQueries('estudiantes');
+        const insertEstudiante = await pool.request()
+                            .input('carnet', sql.VarChar(50), estudiantedata.carnet)
+                            .input('carnet_amigo', sql.VarChar(50), estudiantedata.carnet_amigo)
+                            .input('nombre_amigo', sql.VarChar(50), estudiantedata.nombre_amigo)
+                            .input('apellido1_amigo', sql.VarChar(50), estudiantedata.apellido1_amigo)
+                            .input('apellido2_amigo', sql.VarChar(50), estudiantedata.apellido2_amigo)
+                            .input('estado', sql.VarChar(50), estudiantedata.estado)
+               
+                            .query(sqlQueries.enviarSolicitudAmistad);                            
+        return true;
+    } catch (error) {
+        return error.message;
+    }
+}
 
 
 
@@ -160,6 +182,7 @@ module.exports = {
     updateEstudiante,
     updateEstadoEstudiante,
     deleteEstudiante,
+    envSolicAmistadEstudiante,
 
     existeEstudiantedatic
 }

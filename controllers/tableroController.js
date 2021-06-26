@@ -22,7 +22,21 @@ const addTablero = async (req, res, next) => {
     }
 }
 
+const updatTablero = async (req, res, next) => {
+    try {
+        const data = req.body;
+        const update = await tableroData.updateTablero(data);
+        res.send(update);
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+}
+
+
+
+
 module.exports = {
     getAllTableros,
-    addTablero
+    addTablero,
+    updatTablero
 }

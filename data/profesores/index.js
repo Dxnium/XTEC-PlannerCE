@@ -40,7 +40,6 @@ const creatProfesor = async (profesordata) => {
                             .input('segundo_apellido_prof', sql.VarChar(50), profesordata.segundo_apellido_prof)
                             .input('cedula', sql.VarChar(50), profesordata.cedula)
                             .input('carrera_prof', sql.VarChar(50), profesordata.carrera_prof)
-                            .input('carrera_est', sql.VarChar(50), profesordata.carrera_est)
                             .input('estado_registro', sql.VarChar(50), profesordata.estado_registro)
 
                             .query(sqlQueries.createProfesor);                            

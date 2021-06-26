@@ -45,6 +45,20 @@ const addEstudiante = async (req, res, next) => {
     }
 }
 
+
+
+const envSolicitudEstudiante = async (req, res, next) => {
+    try {
+        const data = req.body;
+        const insert = await estData.envSolicAmistadEstudiante(data);
+        res.send(insert);
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+}
+
+
+
 const verificarEstudiante = async (req, res, next) => {
     try {
         const data = req.body;
@@ -99,6 +113,7 @@ module.exports = {
     updatEstudiante,
     updatEstadoEstudiante,
     deletEstudiante,
+    envSolicitudEstudiante,
 
     existeEstudiante
     /*updatEvent,
