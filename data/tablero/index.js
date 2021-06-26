@@ -31,7 +31,21 @@ const createTablero = async (tableroData) => {
     }
 }
 
+const getTablerosByCarnet = async(data) => {
+    try {
+        let pool = await sql.connect(config.sql);
+        const sqlQueries = await utils.loadSqlQueries('tablero');
+        const tableros = await pool.request()
+                            .input('est_carnet', sql.VarChar, data.est_carnet)
+                            .query(sqlQueries.tablerosByCarnet);
+        return tableros.recordset;
+    } catch (error) {
+        return error.message;
+    }
+}
+
 module.exports = {
     getTableros,
-    createTablero
+    createTablero,
+    getTablerosByCarnet
 }

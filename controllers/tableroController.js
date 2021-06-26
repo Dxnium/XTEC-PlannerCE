@@ -21,8 +21,17 @@ const addTablero = async (req, res, next) => {
         res.status(400).send(error.message);
     }
 }
-
+const getTablerosByCarnet = async (req, res, next) => {
+    try {
+        const data = req.body;
+        const tableros = await tableroData.getTablerosByCarnet(data);
+        res.send(tableros);
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+}
 module.exports = {
     getAllTableros,
-    addTablero
+    addTablero,
+    getTablerosByCarnet
 }
