@@ -4,12 +4,9 @@ const express = require('express');
 const tableroControll = require('../controllers/tableroController');
 const router = express.Router();
 
-router.get('/tablero', tableroControll.getAllTableros);
-router.post('/tablero/agregar', tableroControll.addTablero);
-//router.post('/profesor/agregar', tableroControll.addProfesor);
-////router.delete('/profesor/delete', tableroControll.deletProfesor);
-//router.post('/profesor/update', tableroControll.updatProfesor);
-//router.post('/profesor/updateestado', tableroControll.updatEstadoProfesor);
+router.get('/tablero', tableroControll.getAllTableros);         
+router.post('/tablero/agregar', tableroControll.addTablero);    //Agregar tablero
+router.get('/tableros', tableroControll.getTablerosByCarnet);    //Obtener los tableros de estudiante
 
 
 module.exports = {
