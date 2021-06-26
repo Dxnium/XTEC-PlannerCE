@@ -27,6 +27,30 @@ const getByCarnet = async(data) => {
     }
 }
 
+const existeEstudiantedatic = async(data) => {
+    try {
+        let pool = await sql.connect(config.sqldatic);
+        const sqlQueries = await utils.loadSqlQueries('estudiantes');
+        const estudiante = await pool.request()
+                            .input('carnet', sql.VarChar, data.carnet)
+                            .input('contrasena_est', sql.VarChar, data.contrasena_est)
+                            .query(sqlQueries.estudianteExiste);
+                            
+        if(JSON.stringify(estudiante.recordset)=='[]'){
+            return false;
+        }else{
+            return true;
+        }
+    } catch (error) {
+        return error.message;
+    }
+
+    
+
+}
+
+
+
 const creatEstudiante = async (estudiantedata) => {
     try {
         let pool = await sql.connect(config.sql);
@@ -135,5 +159,7 @@ module.exports = {
     verifEstudiante,
     updateEstudiante,
     updateEstadoEstudiante,
-    deleteEstudiante
+    deleteEstudiante,
+
+    existeEstudiantedatic
 }

@@ -12,6 +12,8 @@ router.post('/estudiante/update', estudianteControll.updatEstudiante);
 router.post('/estudiante/updateestado', estudianteControll.updatEstadoEstudiante);
 router.delete('/estudiante/delete', estudianteControll.deletEstudiante);
 
+router.post('/estudiante/existe', estudianteControll.existeEstudiante);
+
 
 module.exports = {
     routes: router
