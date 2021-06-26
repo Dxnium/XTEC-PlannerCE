@@ -1,0 +1,26 @@
+.board__main{
+    display: flex;
+}
+
+.board__navbar{
+    display: flex;
+    justify-content: flex-end;
+    background: $primary;
+}
+
+.board__navbar-name{
+    margin-top: 5px;
+}
+
+.board__navbar-buttons{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 10px;
+    border-radius: 50px;
+    margin-right: 10px;
+    button{
+        margin-left: 10px;
+        border-radius: 50px;
+    }
+}

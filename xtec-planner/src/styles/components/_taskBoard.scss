@@ -1,0 +1,80 @@
+.taskBoard__main{
+    display: flex;
+    margin-right: auto;
+    align-items: center;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.board__main-task{
+
+}
+
+.taskBoard__main-board{
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto 0 auto;
+    width: 300px;
+    height: 800px;
+    background: $light-grey;
+
+}
+
+.taskBoard__title-wrapper{
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    background: $dark-grey;
+    color: $white;
+
+    .taskboar__board-title{
+        margin-left: 10px;
+    }
+    .fa-plus-circle{
+        cursor: pointer;
+        display: flex;
+        margin-right: 10px;
+        align-self: center;
+        font-size: x-large;
+    }
+}   
+
+
+.taskBoard__task-card-wrapper{
+    // flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    width: 90%;
+    // height: 1100px;
+    margin-top: 30px;
+    overflow-y: auto;
+    text-align: center;
+}
+
+.taskBoard__task-card{
+    background-color: white;
+    border-radius: 4px;
+    color: #000;
+    height: 70px;
+    display: flex;
+    margin-bottom: 10px;
+    justify-content: space-between;
+    overflow: hidden;
+}
+
+.taskBoard__card-title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 10px;
+}
+
+.taskBoard__card-date{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px;
+    margin-top: 10px;
+}
