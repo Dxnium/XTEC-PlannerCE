@@ -1,0 +1,104 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <!--Fontawesome CDN-->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+</head>
+
+<body>
+    <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+    <div class="container">
+        <div class="d-flex justify-content-center h-100">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Registro de usuario</h3>
+                </div>
+                <div class="card-body">
+                    <form [formGroup]="userForm" (submit)="onSubmit(userForm.value)">
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                            </div>
+                            <input id="nombre" type="text" formControlName="nombre" class="form-control" placeholder="Nombre">
+                        </div>
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                            </div>
+                            <input id="apellido1" type="text" formControlName="apellido1" class="form-control" placeholder="Primer apellido">
+                        </div>
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                            </div>
+                            <input id="apellido2" type="text" formControlName="apellido2" class="form-control" placeholder="Segundo apellido">
+                        </div>
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-id-card"></i></span>
+                            </div>
+                            <input *ngIf="this.userType == 2" id="cedula" type="text" formControlName="cedula" class="form-control" placeholder="Cédula">
+                            <input *ngIf="this.userType == 3" id="carnet" type="text" formControlName="carnet" class="form-control" placeholder="Carnet">
+                        </div>
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-graduation-cap"></i></span>
+                            </div>
+                            <input id="carrera" type="text" formControlName="carrera" class="form-control" placeholder="Carrera">
+                        </div>  
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-key"></i></span>
+                            </div>
+                            <input type="password" formControlName="password" class="form-control" placeholder="Contraseña">
+                        </div>
+                        <div *ngIf="this.userType == 2" class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-envelope"></i></span>
+                            </div>
+                            <input type="email" formControlName="email" class="form-control" placeholder="Correo">
+                        </div>
+                        <div *ngIf="this.userType == 3" class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-phone"></i></span>
+                            </div>
+                            <input type="text" formControlName="telefono" class="form-control" placeholder="Telefono">
+                        </div>
+                        <div *ngIf="this.userType == 3" class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-globe"></i></span>
+                            </div>
+                            <input type="text" formControlName="provinciaVive" class="form-control" placeholder="Provincia donde vive">
+                        </div>
+                        <div *ngIf="this.userType == 3" class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-globe"></i></span>
+                            </div>
+                            <input type="text" formControlName="provinciaReside" class="form-control" placeholder="Provincia donde reside">
+                        </div>
+                        <div *ngIf="this.userType == 3" class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-lightbulb"></i></span>
+                            </div>
+                            <select class="form-control">
+                                <option selected="">Intereses</option>
+                                <option>Personales</option>
+                                <option>Acádemicos</option>
+                                <option>Ambos</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Register" class="btn float-right">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
